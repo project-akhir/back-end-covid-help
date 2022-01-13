@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+
 import postRoutes from './routes/posts.js';
 import userRouter from "./routes/user.js";
 
@@ -10,7 +11,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
 
 app.use(cors());
-
+app.get('/', (req, res) => {
+  const message = `
+  <div style="text-align: center;">
+      <h1>WELCOME TO COVID HELP LIST</h1>
+      <p>By Group 9</p>
+      <p>/posts for displaying all users available</p>
+      <p>/users followed by /signin for signin, /signup for signup, and /semua for displaying all users available</p>
+  <div>
+`;
+res.send(message)
+});
 app.use('/posts', postRoutes);
 app.use("/user", userRouter);
 
